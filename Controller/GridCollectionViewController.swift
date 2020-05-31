@@ -82,12 +82,6 @@ extension GridCollectionViewController: UICollectionViewDelegate {
         self.navigationController?.pushViewController(DetailGridVC, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? DetailListViewController {
-//            destination.transitioningDelegate = self
-//        }
-//    }
 }
 
 extension GridCollectionViewController {

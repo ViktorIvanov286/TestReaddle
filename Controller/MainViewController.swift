@@ -11,10 +11,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         list.alpha = 1
         grid.alpha = 0
-        
     }
     
     
