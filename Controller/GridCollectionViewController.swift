@@ -5,6 +5,8 @@ class GridCollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let transition = PopAnimator()
+    var myIndexPath: IndexPath?
     var manager = Manager()
     var statusArray: [UIColor] = [UIColor.red, UIColor.green]
     var anotherStatusArray: [String] = [String]()
@@ -61,6 +63,8 @@ extension GridCollectionViewController: UICollectionViewDataSource {
 
 extension GridCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let DetailGridVC = storyboard.instantiateViewController(identifier: "DetailListViewController") as! DetailListViewController
         
@@ -78,6 +82,12 @@ extension GridCollectionViewController: UICollectionViewDelegate {
         self.navigationController?.pushViewController(DetailGridVC, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? DetailListViewController {
+//            destination.transitioningDelegate = self
+//        }
+//    }
 }
 
 extension GridCollectionViewController {
@@ -87,5 +97,32 @@ extension GridCollectionViewController {
         return digest.map {
             String(format: "%02hhx", $0)
         }.joined()
+    }
+}
+
+// MARK: - UIViewControllerTransitioningDelegate
+
+extension GridCollectionViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController)
+        -> UIViewControllerAnimatedTransitioning? {
+        guard let selectedIndexPathCell = collectionView.indexPathsForSelectedItems?.first, let selectedCell = collectionView.cellForItem(at: selectedIndexPathCell) as? CustomTableViewCell, let selectedCellSuperview = selectedCell.superview else { return nil }
+
+        transition.originFrame = selectedCellSuperview.convert(selectedCell.frame, to: nil)
+        transition.originFrame = CGRect(
+          x: transition.originFrame.origin.x + 20,
+          y: transition.originFrame.origin.y + 20,
+          width: transition.originFrame.size.width - 40,
+          height: transition.originFrame.size.height - 40
+        )
+
+        transition.presenting = true
+            
+            
+      return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController)
+        -> UIViewControllerAnimatedTransitioning? {
+      return nil
     }
 }

@@ -14,7 +14,12 @@ class DetailListViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var email: UILabel!
-
+    
+    
+    @IBAction func cancelButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     var getName = String()
     var getEmail = String()
     var getImage = String()

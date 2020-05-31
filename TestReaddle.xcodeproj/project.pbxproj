@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B09A99224840ECE00F09500 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09A99124840ECE00F09500 /* PopAnimator.swift */; };
 		3BA7A1A1246C35B900F4CB7D /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA7A1A0246C35B900F4CB7D /* CustomTableViewCell.swift */; };
 		3BA7A1A3246C498500F4CB7D /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA7A1A2246C498500F4CB7D /* CustomCollectionViewCell.swift */; };
 		3BB956DB2462A08A00FAD1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB956DA2462A08A00FAD1C8 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B09A99124840ECE00F09500 /* PopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		3BA7A1A0246C35B900F4CB7D /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		3BA7A1A2246C498500F4CB7D /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BB956D72462A08A00FAD1C8 /* TestReaddle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestReaddle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB9DE76246C4B95009CCEF6 /* Manager.swift */,
+				3B09A99124840ECE00F09500 /* PopAnimator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				3BB9DE7A246C62D6009CCEF6 /* DetailListViewController.swift in Sources */,
 				3BA7A1A3246C498500F4CB7D /* CustomCollectionViewCell.swift in Sources */,
 				3BB956DF2462A08A00FAD1C8 /* MainViewController.swift in Sources */,
+				3B09A99224840ECE00F09500 /* PopAnimator.swift in Sources */,
 				3BB9DE77246C4B95009CCEF6 /* Manager.swift in Sources */,
 				3BB956DB2462A08A00FAD1C8 /* AppDelegate.swift in Sources */,
 				3BC9ED2A2462DC1E00630FC1 /* GridCollectionViewController.swift in Sources */,

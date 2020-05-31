@@ -6,7 +6,9 @@ class ListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var manager = Manager()
-    
+    let transition = PopAnimator()
+    var myRow: Int = 0
+    var myInexPath: IndexPath?
     var statusArray: [UIColor] = [UIColor.red, UIColor.green]
     let url = "https://www.gravatar.com/avatar/"
     
@@ -95,17 +97,22 @@ extension ListViewController: UITableViewDataSource {
 
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let DetailVC = storyboard.instantiateViewController(identifier: "DetailListViewController") as! DetailListViewController
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        
-        DetailVC.getImage = url + MD5(string: manager.arrayOfEmails[indexPath.row].lowercased())
-        DetailVC.getName = manager.arrayOfNames[indexPath.row]
-        DetailVC.getStatus = cell.statusColor.backgroundColor == UIColor.green ? "online" : "offline"
-        DetailVC.getEmail = manager.arrayOfEmails[indexPath.row]
-        
-        self.navigationController?.pushViewController(DetailVC, animated: true)
+        myRow = indexPath.row
+        myInexPath = indexPath
+        performSegue(withIdentifier: "details1", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailListViewController {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: myInexPath!) as! CustomTableViewCell
+            
+            destination.transitioningDelegate = self
+            destination.getImage = url + MD5(string: manager.arrayOfEmails[myRow].lowercased())
+            destination.getName = manager.arrayOfNames[myRow]
+            destination.getStatus = cell.statusColor.backgroundColor == UIColor.green ? "online" : "offline"
+            destination.getEmail = manager.arrayOfEmails[myRow]
+        }
     }
     
     
@@ -144,3 +151,29 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
+
+extension ListViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController)
+        -> UIViewControllerAnimatedTransitioning? {
+        guard let selectedIndexPathCell = tableView.indexPathForSelectedRow, let selectedCell = tableView.cellForRow(at: selectedIndexPathCell) as? CustomTableViewCell, let selectedCellSuperview = selectedCell.superview else { return nil }
+
+        transition.originFrame = selectedCellSuperview.convert(selectedCell.frame, to: nil)
+        transition.originFrame = CGRect(
+          x: transition.originFrame.origin.x + 20,
+          y: transition.originFrame.origin.y + 20,
+          width: transition.originFrame.size.width - 40,
+          height: transition.originFrame.size.height - 40
+        )
+
+        transition.presenting = true
+            
+            
+      return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController)
+        -> UIViewControllerAnimatedTransitioning? {
+      return nil
+    }
+}
+
